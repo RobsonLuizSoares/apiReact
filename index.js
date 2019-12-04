@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000
 const bodyParser = require('body-parser')
+const cors = require('cors')
 const uri = 'mongodb+srv://lya:25092016@apireact-ltema.mongodb.net/test?retryWrites=true&w=majority'
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
@@ -39,7 +40,7 @@ mongoose.connection.on('disconnected', () => {
 })
 
 //Body Parser
-
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
