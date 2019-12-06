@@ -4,6 +4,7 @@ const userQuery = require('../models/userQuerys')
 
 const router = express.Router()
 
+
 router.get('/', async (req, res) => {
   try {
     const users = await Users.find({})
@@ -37,7 +38,39 @@ router.post('/create', async (req, res) => {
 
   }
 })
+// Rota de busca
+router.get('/buscar/:name', userQuery.searchByName)
 
-router.get('/busca/:name', userQuery.searchByName)
+// PUT
+router.put('/editar/:id', async (req, res, next) => {
+  try {
+    const editUser = await Users.findOneAndUpdate({ _id: req.params.id }, req.body)
+
+      .then(() => {
+        Users.findOne({ _id: req.params.id })
+
+        return res.send({ message: 'Usuário editado com sucesso' })
+
+      })
+
+  } catch (error) {
+    if (error) return console.log(error)
+
+  }
+})
+
+
+router.delete('/excluir/:id', async (req, res) => {
+  try {
+    const removeUser = await Users.findByIdAndRemove({
+      _id: req.params.id
+    })
+
+    return res.send({ message: 'Usuário excluído' })
+  } catch (error) {
+    if (error) return res.send({ message: 'Erro ao excluir usuário' })
+  }
+
+})
 
 module.exports = router
