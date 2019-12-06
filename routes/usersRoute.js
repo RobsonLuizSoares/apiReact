@@ -39,7 +39,7 @@ router.post('/create', async (req, res) => {
   }
 })
 // Rota de busca
-router.get('/buscar/:name', userQuery.searchByName)
+router.get('/user/:id', userQuery.searchByName)
 
 // PUT
 router.put('/editar/:id', async (req, res, next) => {

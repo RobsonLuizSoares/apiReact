@@ -4,7 +4,7 @@ const searchByName = async (req, res, next) => {
   const urlParameter = req.params.name
   try {
 
-    const search = await User.find({ 'name': urlParameter })
+    const search = await User.find({ '_id': urlParameter })
 
     return res.json(search)
 
