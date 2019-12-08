@@ -45,13 +45,15 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 const indexRoute = require('./routes/indexRoute')
-const usersRoute = require('./routes/usersRoute')
+const unidadesRoute = require('./routes/unidadesRoute')
+const pendenciasRoute = require('./routes/pendenciasRoute')
 
 
 app.use(express.static('public'))
 
 app.use('/', indexRoute)
-app.use('/users', usersRoute)
+app.use('/unidades', unidadesRoute)
+app.use('/pendencias', pendenciasRoute)
 
 
 
