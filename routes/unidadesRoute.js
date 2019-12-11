@@ -5,21 +5,29 @@ const Pendencia = require('../models/Pendencia')
 
 const router = express.Router()
 
+router.get('/', (req, res) => {
+  res.json({ message: 'Página de Unidades' })
+})
 // buscar as  Unidades - OK
-router.get('/', async (req, res) => {
+router.get('/search', async (req, res) => {
   try {
-    const unidades = await Unidade.find({})
-    return res.json(unidades)
+    const unidades = await Unidade
+      .find()
+      .populate('pendencia')
+      .sort({ created: 1 })
+      .then((unidades) => {
+        return res.json(unidades)
+      })
   }
   catch (error) {
-    return res.json({ error: 'Erro na consulta de usuários' })
+    return res.json({ error: 'Erro na consulta de Unidades' })
   }
 })
 //Criar Unidade - OK
 router.post('/create', async (req, res) => {
-  const { name, local } = req.body
+  const { name, local, responsavel } = req.body
 
-  if (!name || !local) return res.send({ error: 'Dados insuficientes para criar novo usuário' })
+  if (!name || !local || !responsavel) return res.send({ error: 'Dados insuficientes para criar novo usuário' })
 
   try {
 

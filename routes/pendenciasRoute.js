@@ -5,20 +5,27 @@ const pendenciaQuerys = require('../models/pendenciaQuerys')
 
 const router = express.Router()
 
-router.get('/', async (req, res) => {
-  const pendencias = await Pendencia
-    .find()
-    .populate('Unidade')
-    .sort({ created: '1' })
-    .then((pendencias) => {
-      return res.json({ pendencias })
+router.get('/', (req, res) => {
+  res.json({ message: 'Página de Pendências' })
+})
 
-    })
+router.get('/search', async (req, res) => {
+  try {
+    const pendencias = await Pendencia
+      .find()
+      .populate('unidade')
+      .sort({ created: 1 })
+      .then((pendencias) => {
+        return res.json(pendencias)
+      })
+  }
+  catch (error) {
+    return res.json({ error: 'Erro na consulta de usuários' })
+  }
 })
 
 router.post('/create', async (req, res) => {
   const pendencia = await Pendencia.create(req.body)
-
   new Pendencia(pendencia)
     .save()
     .then(() => {

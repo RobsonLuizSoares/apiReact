@@ -3,12 +3,20 @@ const Schema = mongoose.Schema
 
 const UnidadeSchema = new Schema({
   name: {
-    type: String
+    type: String,
+    required: true
   },
   local: {
     type: String,
-    required: true,
-    lowercase: true
+    required: true
+  },
+  responsavel: {
+    type: String,
+    required: true
+  },
+  pendencia: {
+    type: Schema.Types.ObjectId,
+    ref: 'Pendencia'
   },
   created: {
     type: Date,

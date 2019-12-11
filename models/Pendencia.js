@@ -4,17 +4,26 @@ const Schema = mongoose.Schema
 const PendenciaSchema = new Schema({
   unidade: {
     type: Schema.Types.ObjectId,
-    ref: 'name',
+    ref: 'Unidade',
     required: true
   },
-  tipo: {
-    type: String,
-    required: true,
-    lowercase: true
+  termo: {
+    type: Boolean,
+    required: true
   },
-  sanada: {
+  bem: {
+    type: Boolean,
+    required: true
+  },
+  isOk: {
     type: Boolean,
     required: true,
+  },
+  tombamento: {
+    type: Number
+  },
+  comentario: {
+    type: String
   },
   created: {
     type: Date,
