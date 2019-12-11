@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const uri = 'mongodb+srv://lya:25092016@apireact-ltema.mongodb.net/test?retryWrites=true&w=majority'

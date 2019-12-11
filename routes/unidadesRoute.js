@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
 // buscar as  Unidades - OK
 router.get('/search', async (req, res) => {
   try {
+
     const unidades = await Unidade
       .find()
       .populate('pendencia')
@@ -50,6 +51,7 @@ router.get('/local/:local', unidadeQuery.searchByLocal)
 // Rota de busca por name - OK
 router.get('/nome/:name', unidadeQuery.searchByName)
 
+router.get('/pendentes/:name', unidadeQuery.searchByPendencias)
 
 // PUT - Editar Unidade - Ok
 router.put('/edit/:id', async (req, res, next) => {
